@@ -1,0 +1,110 @@
+<div class="container main">
+    <div class="row mt-4 nttData ">
+        <div class="col-12 d-flex justify-content-around">
+            <button type="button" class="card btn radiusCardPersonale " data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                style=" background-image: url('IMMAGINI/work2.jpg'); background-repeat: no-repeat;    background-size: cover;">
+                <div class="card-body cardBody d-flex align-items-center">
+                    <div>
+                        <h5 class="card-title titolo">Test interfel 1</h5>
+                        <div class="alert alert-warning  alertYellow" role="alert ">
+                            Lorem ipsum dolor sit
+                            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua.
+                        </div>
+                    </div>
+
+                </div>
+            </button>
+            <button class="card btn radiusCardPersonale "
+                style=" background-image: url('assets/images/amministrazione.jpg'); background-repeat: no-repeat;    background-size: cover; ">
+                <div class="card-body cardBody d-flex align-items-center">
+                    <div>
+                        <h5 class="card-title titolo">Test Interfell 2</h5>
+
+                        <div class="alert alert-warning  alertYellow" role="alert ">
+                            Lorem ipsum dolor sit
+                            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua.
+                        </div>
+                    </div>
+
+                </div>
+            </button>
+            <button class="card btn radiusCardPersonale "
+                style=" background-image: url('IMMAGINI/amalfi1.jpg');  background-repeat: no-repeat;   background-size: cover; ">
+                <div class="card-body cardBody d-flex align-items-center">
+                    <div>
+                        <h5 class="card-title titolo">Test Interfell 3</h5>
+
+                        <div class="alert alert-warning  alertYellow" role="alert ">
+                            Lorem ipsum dolor sit
+                            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua.
+                        </div>
+                    </div>
+
+                </div>
+            </button>
+        </div>
+    </div>
+<div type= "button" class="acessoAreaAmministrativa" (click)="toogleAreaAmministrativa()">
+        <i class="fas fa-sort-down"></i> Area administrativa 
+</div>
+    
+    <div *ngIf="areaAmministrativa" class="card cardAmministrativa" style = "background-image: url('assets/images/amministrazione.jpg');">
+        <div class="card-body cardBodyAmministrativa">
+            <div class="row mt-4 nttData ">
+                <div class="col-12 d-flex justify-content-around">
+                    <button type="button" class="card btn radiusCardPersonale " data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style=" background-image: url('IMMAGINI/work2.jpg'); background-repeat: no-repeat;    background-size: cover;">
+                        <div class="card-body cardBody d-flex align-items-center">
+                            <div>
+                                <h5 class="card-title titolo">Test Interfell 1</h5>
+                                <div class="alert alert-warning  alertYellow" role="alert ">
+                                    Lorem ipsum dolor sit
+                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                    magna aliqua.
+                                </div>
+                            </div>
+        
+                        </div>
+                    </button>
+                    <button class="card btn radiusCardPersonale "
+                        style=" background-image: url('assets/images/amministrazione.jpg'); background-repeat: no-repeat;    background-size: cover; ">
+                        <div class="card-body cardBody d-flex align-items-center">
+                            <div>
+                                <h5 class="card-title titolo">Test Interfell 2</h5>
+        
+                                <div class="alert alert-warning  alertYellow" role="alert ">
+                                    Lorem ipsum dolor sit
+                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                    magna aliqua.
+                                </div>
+                            </div>
+        
+                        </div>
+                    </button>
+                    <button class="card btn radiusCardPersonale "
+                        style=" background-image: url('IMMAGINI/amalfi1.jpg');  background-repeat: no-repeat;   background-size: cover; ">
+                        <div class="card-body cardBody d-flex align-items-center">
+                            <div>
+                                <h5 class="card-title titolo">Test Interfell 3</h5>
+        
+                                <div class="alert alert-warning  alertYellow" role="alert ">
+                                    Lorem ipsum dolor sit
+                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                    magna aliqua.
+                                </div>
+                            </div>
+        
+                        </div>
+                    </button>
+                </div>
+        </div>
+    </div>
+
+
+
+</div>

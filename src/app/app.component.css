@@ -1,0 +1,19 @@
+
+.bg-NTTdata{
+    background-color: #070e27!important;
+    
+}
+.nav-link {
+    color:white!important
+}
+.nav-link-active{
+    color:  #fad100 ;
+    font-weight: bold !important;
+}
+.contenutoCentrato{
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+}

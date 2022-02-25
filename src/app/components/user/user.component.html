@@ -1,0 +1,271 @@
+<div class="container main">
+  <div class="row mt-4 nttData">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-6">
+          <h4>Lista Interfell</h4>
+        </div>
+        
+        <div class="col-6 d-flex flex-row-reverse" style="padding-right:120px;">
+          <button #btnAddUser class="btn buttonAggiungi" (click)="newUserModal(modaNewlUser)"><i class="fas fa-plus"> </i> </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div *ngFor="let user of users">
+            <div class="cardUser row" type="button"  #btnStore id={{user.id}} type="button"(click)="aprimodaleInfo(user.id)" >
+              <div class="col-6">
+                {{user.nombreDelCondado}} {{user.condado}}
+              </div>
+              <div class="col-6 d-flex flex-row-reverse">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  
+</div>
+
+<!--modale conferma-->
+<ng-template #modalConfermaUpdate let-modal>
+    <div class="modaleheader"></div>
+      <div class="modal-body">
+        Utente modificato correttamente
+      </div>
+      <div class="modalefooter">
+        <button type="button" class="btn buttonInfo fas fa-check " (click)="closeAllModal()"></button>
+      </div>
+</ng-template>
+<ng-template #modalConfermaInsert let-modal>
+  <div class="modaleheader"></div>
+    <div class="modal-body">
+      Utente inserto correttamente
+    </div>
+    <div class="modalefooter">
+      <button type="button" class="btn buttonInfo fas fa-check " (click)="closeAllModal()"></button>
+    </div>
+</ng-template>
+
+<ng-template #modalConfermaDelete let-modal>
+  <div class="modaleheader"></div>
+    <div class="modal-body">
+      Utente eliminato correttamente
+    </div>
+    <div class="modalefooter">
+      <button type="button" class="btn buttonInfo fas fa-check " (click)="closeAllModal()"></button>
+    </div>
+</ng-template>
+<!--modale richiesta DEL-->
+<ng-template #modalRichiestaDelete let-modal>
+  <div class="modaleheader"></div>
+    <div class="modal-body">
+      Eliminare dipendente  {{userDaModificare.nombreDelCondado}} {{userDaModificare.condado}}?
+    </div>
+    <div class="modal-footer modalefooter ">
+
+      <button type="button" class="btn buttonInfo fas fa-times " (click)="modal.close()"></button>
+      <button #btnDelete  type="button" class="btn buttonDanger"
+      (click)="eliminaDipendente()"><i class="far fa-trash  "> </i> </button>
+    </div>
+</ng-template>
+<!-- MODALE INFO nuova-->
+<ng-template #modalUserInfo let-modal>
+  <div class="modaleheader">
+    <div class="row">
+      <div class="col-9">
+       <h4 class="modal-title dataUserTitle">    {{singleUser.nombreDelCondado}} {{singleUser.condado}} </h4>
+      </div>
+      <div  class="col-3 d-flex flex-row-reverse" >
+        <button type="button" class="btn buttonAggiungi fas fa-times " (click)="closeAllModal()"></button>
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <div class="modal-body container">
+      <div class="row" >
+      
+        <div class="col-6">
+          <form>
+            <div class="form-group">
+              <label  class="inputLabel">ID:</label>
+              <input type="text" [(ngModel)]="singleUser.id"
+                placeholder="ID" [ngModelOptions]="{standalone: true}" [className]="nomeMod.invalid && (nomeMod.dirty || nomeMod.touched) ? 'inputFormRed' : 'inputForm'"required minlength="3" #nomeMod="ngModel" disabled />
+              </div>
+            <div class="form-group">
+              <label  class="inputLabel">Date:</label>
+              <input  type="text" class="form-control inputForm" aria-describedby="emailHelp"
+                placeholder="Enter Date" [(ngModel)]="singleUser.date" [ngModelOptions]="{standalone: true}" [className]="emailMod.invalid && (emailMod.dirty || emailMod.touched) ? 'inputFormRed' : 'inputForm'"required minlength="3" #emailMod="ngModel" disabled >
+            </div>
+          </form>
+        </div>
+        <div class="col-6">
+          <form>
+            <div class="form-group">
+              <label for="" class="inputLabel">Condado:</label>
+              <input type="number" class="form-control inputForm" placeholder="Enter nombre condado"
+                [(ngModel)]="singleUser.condado" [ngModelOptions]="{standalone: true}" disabled>
+            </div>
+            <div class="form-group">
+              <label  class="inputLabel" > Nombre Del Condado:</label>
+              <input  type="text" class="form-control inputForm" placeholder="Enter condado"
+                [(ngModel)]="singleUser.nombreDelCondado" [ngModelOptions]="{standalone: true}" disabled>
+            </div>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+    <div class="modalefooter">
+      <div class="row">
+        <div class="col-6 d-flex flex-row-start"> 
+          <button  type="button" class="btn buttonInfo far fa-edit "
+            (click)="aprimodaleModifica()"><span aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+  </div> 
+</ng-template>
+<!-- Modale User modifica-->
+<ng-template #modalUserModifica let-modal>
+  <div class="modaleheader">
+    <div class="row">
+      <div class="col-9">
+       <h4 class="modal-title dataUserTitle">    {{singleUser.condado}} {{singleUser.nombreDelCondado}}  <span style = "font-weight: normal; font-size: small; color: white;">  (*campi obbligatori) </span></h4>
+      </div>
+      <div  class="col-3 d-flex flex-row-reverse" >
+        
+        <button  type="button" class="btn buttonAggiungi fas fa-undo "
+            (click)="modal.close()"><span aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body container">
+    <div class="row" >
+    
+      <div class="col-6">
+        <form>
+          <div class="form-group">
+            <label  class="inputLabel">Nombre Condado: *</label>
+            <input type="text" [(ngModel)]="userDaModificare.nombreDelCondado"
+              placeholder="nombreDelCondado" [ngModelOptions]="{standalone: true}" [className]="nomeMod.invalid && (nomeMod.dirty || nomeMod.touched) ? 'inputFormRed form-control' : 'inputForm form-control'"required minlength="3" #nomeMod="ngModel"  />
+            </div>
+          <div class="form-group">
+            <label  class="inputLabel">Condado: *</label>
+            <input  type="text" class="form-control inputForm " placeholder="Condado"
+              [(ngModel)]="userDaModificare.condado" [ngModelOptions]="{standalone: true}" [className]="cognomeMod.invalid && (cognomeMod.dirty || cognomeMod.touched) ? 'inputFormRed form-control' : 'inputForm form-control '"required minlength="3" #cognomeMod="ngModel" />
+          </div>
+          <div class="form-group">
+            <label  class="inputLabel">Date: *</label>
+            <input  type="email" class="form-control inputForm" aria-describedby="emailHelp"
+              placeholder="Enter Date" [(ngModel)]="userDaModificare.date" [ngModelOptions]="{standalone: true}" [className]="emailMod.invalid && (emailMod.dirty || emailMod.touched) ? 'inputFormRed form-control ' : 'inputForm form-control'"required minlength="3" #emailMod="ngModel"  >
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <form>
+          <div class="form-group">
+            <label for="" class="inputLabel"> Media Del Condado:</label>
+            <input type="number" class="form-control inputForm" placeholder="Enter id cluster"
+              [(ngModel)]="userDaModificare.mediaDelCondado" [ngModelOptions]="{standalone: true}" >
+          </div>
+          <div class="form-group">
+            <label  class="inputLabel" >Porcentaje De Cambio Para Enero:</label>
+            <input  type="text" class="form-control inputForm" placeholder="Enter porcentajeDeCambioParaEnero"
+              [(ngModel)]="userDaModificare.porcentajeDeCambioParaEnero
+              " [ngModelOptions]="{standalone: true}" >
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+    <div class="modalefooter">
+      <div class="row">
+        <div class="col-6 d-flex flex-row-start"> 
+            
+        </div>
+        <div class="col-6 d-flex flex-row-reverse" >
+          <button #btnDelete type="button" class="btn buttonDanger" (click)="confermaEliminazione()"><i class="far fa-trash  "> </i> </button>
+          
+          
+          <div *ngIf="nomeMod.invalid || cognomeMod.invalid || emailMod.invalid   else elseBlocco" >
+            <button type="button"  class="btn buttonInfo far fa-edit" disabled></button>
+          </div>
+          <ng-template #elseBlocco>
+            <button type="button" (click)="modificaUtente()" class="btn buttonInfo far fa-edit" data-dismiss="modal"></button>
+          </ng-template>   
+        </div>
+      </div> 
+  </div> 
+</ng-template>
+
+
+<!--modle new USER-->
+<ng-template #modaNewlUser let-modal>
+  <div class="modaleheader">
+    <div class="row">
+      <div class="col-9">
+        <h4 class="modal-title"> Inserisci nuovo utente  <span style = "font-weight: normal; font-size: small; color: #fad100;">  (*campi obbligatori) </span> </h4>
+      </div>
+      <div class="col-3 d-flex flex-row-reverse"><button type="button" class="btn buttonAggiungi fas fa-times " (click)="closeAllModal()"></button></div>
+      
+    </div>
+  </div>
+  <div class="modal-body container">
+    <div class="row">
+    </div>
+    <div class="row">
+      
+      <div class="col-6">
+        <form>
+          <div class="form-group">
+            <label class="inputLabel"  for="">Media Del Condado: *</label>
+            <input  type="text" class="form-control inputForm " placeholder="mediaDelCondado"
+              [(ngModel)]="newUser.mediaDelCondado" [ngModelOptions]="{standalone: true}" [className]="mediaDelCondado.invalid && (mediaDelCondado.dirty || mediaDelCondado.touched) ? 'inputFormRed' : 'inputForm'"required minlength="3" #mediaDelCondado="ngModel"/>
+          </div>
+          <div class="form-group">
+            <label class="inputLabel"  for="">Porcentaje De Cambio Para Enero: *</label>
+            <input  type="text" class="form-control inputForm" aria-describedby="emailHelp"
+              placeholder="Enter porcentajeDeCambioParaEnero" [(ngModel)]="newUser.porcentajeDeCambioParaEnero" [ngModelOptions]="{standalone: true}" [className]="porcentajeDeCambioParaEnero.invalid && (porcentajeDeCambioParaEnero.dirty || porcentajeDeCambioParaEnero.touched) ? 'inputFormRed' : 'inputForm'"required minlength="3" #porcentajeDeCambioParaEnero="ngModel" >
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <form>
+          <div class="form-group">
+            <label class="inputLabel"  for="">PorcentajeDeCambioParaEnero: *</label>
+            <input type="number" class="form-control inputForm" placeholder="Enter porcentajeDeCambioParaEnero"
+              [(ngModel)]="newUser.porcentajeDeCambioParaEnero" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+            <label class="inputLabel"  for="">MediaDelCondado:</label>
+            <input  type="text" class="form-control inputForm" placeholder="Enter mediaDelCondado"
+              [(ngModel)]="newUser.mediaDelCondado" [ngModelOptions]="{standalone: true}">
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="modalefooter">
+    <div class="row">
+    <div class="col d-flex flex-row-reverse"> 
+      <div *ngIf="mediaDelCondado.invalid  ; else elseBlock"  >
+     
+        <button class="btn buttonInfo fas fa-check"
+        data-dismiss="modal" disabled></button>
+      </div>
+        <ng-template #elseBlock> 
+          <button type="button" (click)="insertUser()" class="btn buttonInfo fas fa-check" data-dismiss="modal" ></button>
+      </ng-template>
+    </div>
+    
+  </div>
+  </div>
+</ng-template>
